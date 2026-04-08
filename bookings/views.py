@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
-def index(request):
-    return HttpResponse("Bookings app is ready.")
+def home(request):
+    """Site home page — uses templates/bookings/home.html which extends base.html."""
+    return render(request, "bookings/home.html")

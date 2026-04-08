@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Train Seat Booking{% endblock %}</title>
+  <style>
+    /* Simple starter styles — easy to read and change later */
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      line-height: 1.5;
+      color: #222;
+      background: #f5f5f5;
+    }
+    a { color: #0d47a1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .navbar {
+      background: #1565c0;
+      color: #fff;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+    .navbar a { color: #fff; }
+    .navbar-brand { font-weight: 700; margin-right: auto; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+    .messages { list-style: none; padding: 0; margin: 0 0 1rem; }
+    .messages li {
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+    .messages .success { background: #e8f5e9; color: #1b5e20; }
+    .messages .error { background: #ffebee; color: #b71c1c; }
+    .messages .info { background: #e3f2fd; color: #0d47a1; }
+    .messages .warning { background: #fff8e1; color: #f57f17; }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  {# Top bar: same on every page that extends this template #}
+  <nav class="navbar" aria-label="Main navigation">
+    <span class="navbar-brand">Train Seat Booking</span>
+    <div class="nav-links">
+      <a href="{% url 'bookings:home' %}">Home</a>
+      <a href="#">My bookings</a>
+      {% if user.is_authenticated %}
+        <span>Hi, {{ user.username }}</span>
+        <a href="#">Logout</a>
+      {% else %}
+        <a href="#">Login</a>
+        <a href="#">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    {# Django "messages": short notes after login, save, errors, etc. #}
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
