@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Booking — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Edit booking</h1>
+
+  <p>
+    <strong>Route:</strong> {{ booking.trip.origin }} to {{ booking.trip.destination }}<br>
+    <strong>Departure:</strong> {{ booking.trip.departure_time|date:"D d M Y, H:i" }}<br>
+    <strong>Current seats:</strong> {{ booking.seats_booked }}
+  </p>
+
+  <form method="post" style="background: #fff; padding: 1rem; border-radius: 6px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+
+  <p style="margin-top: 1rem;">
+    <a href="{% url 'bookings:booking_detail' booking.id %}">Back to booking details</a>
+  </p>
+{% endblock %}

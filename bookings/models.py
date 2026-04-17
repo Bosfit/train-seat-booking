@@ -46,9 +46,17 @@ class Booking(models.Model):
         if self.trip.departure_time <= timezone.now():
             raise ValidationError("You cannot book a trip that has already departed.")
 
-        if self.seats_booked > self.trip.seats_available:
+        available_seats = self.trip.seats_available
+        if self.pk:
+            previous_booking = (
+                Booking.objects.filter(pk=self.pk).values("trip_id", "seats_booked").first()
+            )
+            if previous_booking and previous_booking["trip_id"] == self.trip_id:
+                available_seats += previous_booking["seats_booked"]
+
+        if self.seats_booked > available_seats:
             raise ValidationError(
-                f"Only {self.trip.seats_available} seat(s) are available for this trip."
+                f"Only {available_seats} seat(s) are available for this trip."
             )
 
     def __str__(self):
