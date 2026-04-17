@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Login — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Login</h1>
+  <p>Login to create bookings and view your saved trips.</p>
+
+  {% if form.errors %}
+    <div style="background: #ffebee; color: #b71c1c; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem;">
+      Login failed. Please check your username and password and try again.
+    </div>
+  {% endif %}
+
+  <form method="post" style="background: #fff; padding: 1rem; border-radius: 6px;">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% for error in field.errors %}
+          <br><small style="color: #b71c1c;">{{ error }}</small>
+        {% endfor %}
+      </p>
+    {% endfor %}
+
+    {% for error in form.non_field_errors %}
+      <p><small style="color: #b71c1c;">{{ error }}</small></p>
+    {% endfor %}
+
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit">Login</button>
+  </form>
+
+  <p style="margin-top: 1rem;">
+    Do not have an account?
+    <a href="{% url 'accounts:register' %}">Register here</a>.
+  </p>
+{% endblock %}

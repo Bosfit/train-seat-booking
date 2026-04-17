@@ -15,7 +15,7 @@ def home(request):
     return render(request, "bookings/home.html", context)
 
 
-@login_required(login_url="accounts:index")
+@login_required(login_url="accounts:login")
 def create_booking(request, trip_id):
     trip = get_object_or_404(TrainTrip, id=trip_id)
 
@@ -39,7 +39,7 @@ def create_booking(request, trip_id):
     )
 
 
-@login_required(login_url="accounts:index")
+@login_required(login_url="accounts:login")
 def my_bookings(request):
     bookings = Booking.objects.filter(user=request.user).select_related("trip")
     return render(request, "bookings/my_bookings.html", {"bookings": bookings})

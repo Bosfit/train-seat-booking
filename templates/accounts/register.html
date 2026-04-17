@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Register — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Create account</h1>
+  <p>Create your account to book and manage trips.</p>
+
+  <div style="background: #e3f2fd; color: #0d47a1; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem;">
+    <strong>Password rules:</strong> use at least 8 characters and avoid common or fully numeric passwords.
+  </div>
+
+  {% if form.errors %}
+    <div style="background: #ffebee; color: #b71c1c; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem;">
+      Please fix the highlighted fields below and try again.
+    </div>
+  {% endif %}
+
+  <form method="post" style="background: #fff; padding: 1rem; border-radius: 6px;">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <br><small>{{ field.help_text|safe }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <br><small style="color: #b71c1c;">{{ error }}</small>
+        {% endfor %}
+      </p>
+    {% endfor %}
+
+    {% for error in form.non_field_errors %}
+      <p><small style="color: #b71c1c;">{{ error }}</small></p>
+    {% endfor %}
+
+    <button type="submit">Create account</button>
+  </form>
+
+  <p style="margin-top: 1rem;">
+    Already have an account?
+    <a href="{% url 'accounts:login' %}">Login here</a>.
+  </p>
+{% endblock %}
