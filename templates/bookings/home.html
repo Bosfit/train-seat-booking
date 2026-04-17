@@ -3,12 +3,47 @@
 {% block title %}Home — Train Seat Booking{% endblock %}
 
 {% block content %}
-  <h1>Welcome</h1>
+  <h1>Available train trips</h1>
   <p>
-    This is the home page. Later you will browse train trips and book seats here.
+    Pick a trip from the list below. Booking actions will be added in the next step.
   </p>
-  <p>
-    The <strong>navbar</strong> above is shared by all pages that extend <code>base.html</code>.
-    Links like Login and My bookings use <code>#</code> for now — you will replace them with real URLs when you build those features.
-  </p>
+
+  {% if trips %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; background: #fff;">
+        <thead>
+          <tr>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Route</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Departure</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Price</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Seats left</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trip in trips %}
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                {{ trip.origin }} to {{ trip.destination }}
+              </td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                {{ trip.departure_time|date:"D d M Y, H:i" }}
+              </td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                GBP {{ trip.price }}
+              </td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                {{ trip.seats_available }}
+              </td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                <a href="{% url 'bookings:create_booking' trip.id %}">Book this trip</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No trips available yet. Add some trips in Django admin.</p>
+  {% endif %}
 {% endblock %}

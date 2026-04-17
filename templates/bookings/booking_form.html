@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Book Trip — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Book your trip</h1>
+
+  <p>
+    <strong>Route:</strong> {{ trip.origin }} to {{ trip.destination }}<br>
+    <strong>Departure:</strong> {{ trip.departure_time|date:"D d M Y, H:i" }}<br>
+    <strong>Price per seat:</strong> GBP {{ trip.price }}
+  </p>
+
+  <form method="post" style="background: #fff; padding: 1rem; border-radius: 6px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirm booking</button>
+  </form>
+{% endblock %}

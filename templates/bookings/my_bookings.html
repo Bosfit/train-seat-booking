@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>My bookings</h1>
+
+  {% if bookings %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; background: #fff;">
+        <thead>
+          <tr>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Reference</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Route</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Departure</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Seats</th>
+            <th style="text-align: left; padding: 0.75rem; border-bottom: 1px solid #ddd;">Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for booking in bookings %}
+            <tr>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">{{ booking.booking_reference }}</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                {{ booking.trip.origin }} to {{ booking.trip.destination }}
+              </td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                {{ booking.trip.departure_time|date:"D d M Y, H:i" }}
+              </td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">{{ booking.seats_booked }}</td>
+              <td style="padding: 0.75rem; border-bottom: 1px solid #eee;">
+                {% if booking.is_paid %}Yes{% else %}No{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>You do not have any bookings yet.</p>
+  {% endif %}
+{% endblock %}
