@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 
 class TrainTrip(models.Model):
@@ -36,6 +38,18 @@ class Booking(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+    def clean(self):
+        if not self.trip_id:
+            return
+
+        if self.trip.departure_time <= timezone.now():
+            raise ValidationError("You cannot book a trip that has already departed.")
+
+        if self.seats_booked > self.trip.seats_available:
+            raise ValidationError(
+                f"Only {self.trip.seats_available} seat(s) are available for this trip."
+            )
 
     def __str__(self):
         return f"{self.booking_reference} - {self.user} - {self.trip}"
