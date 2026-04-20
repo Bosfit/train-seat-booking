@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -123,3 +124,6 @@ STATIC_URL = 'static/'
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "bookings:home"
 LOGOUT_REDIRECT_URL = "bookings:home"
+
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Success — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Payment successful</h1>
+  <p>Your booking has been marked as paid.</p>
+
+  <div style="background: #fff; padding: 1rem; border-radius: 6px;">
+    <p><strong>Reference:</strong> {{ booking.booking_reference }}</p>
+    <p><strong>Route:</strong> {{ booking.trip.origin }} to {{ booking.trip.destination }}</p>
+    <p><strong>Paid:</strong> {% if booking.is_paid %}Yes{% else %}No{% endif %}</p>
+  </div>
+
+  <p style="margin-top: 1rem;">
+    <a href="{% url 'bookings:booking_detail' booking.id %}">Back to booking details</a>
+  </p>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Checkout</h1>
+  <p>Review your booking and continue to Stripe test checkout.</p>
+
+  <div style="background: #fff; padding: 1rem; border-radius: 6px;">
+    <p><strong>Reference:</strong> {{ booking.booking_reference }}</p>
+    <p><strong>Route:</strong> {{ booking.trip.origin }} to {{ booking.trip.destination }}</p>
+    <p><strong>Seats:</strong> {{ booking.seats_booked }}</p>
+    <p><strong>Price per seat:</strong> GBP {{ booking.trip.price }}</p>
+    <p><strong>Total:</strong> GBP {{ total_price }}</p>
+  </div>
+
+  <form method="post" style="margin-top: 1rem;">
+    {% csrf_token %}
+    <button type="submit">Pay with Stripe (test mode)</button>
+    <a href="{% url 'bookings:booking_detail' booking.id %}">Back</a>
+  </form>
+{% endblock %}
