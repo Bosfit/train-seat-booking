@@ -5,7 +5,7 @@
 {% block content %}
   <h1>Book your trip</h1>
 
-  <p>
+  <p id="trip-pricing" data-price="{{ trip.price }}">
     <strong>Route:</strong> {{ trip.origin }} to {{ trip.destination }}<br>
     <strong>Departure:</strong> {{ trip.departure_time|date:"D d M Y, H:i" }}<br>
     <strong>Price per seat:</strong> GBP {{ trip.price }}
@@ -14,6 +14,36 @@
   <form method="post" style="background: #fff; padding: 1rem; border-radius: 6px;">
     {% csrf_token %}
     {{ form.as_p }}
+    <p>
+      <strong>Estimated total:</strong>
+      <span id="estimated-total">GBP 0.00</span>
+    </p>
     <button type="submit">Confirm booking</button>
   </form>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    (function () {
+      const seatsInput = document.getElementById("id_seats_booked");
+      const pricingBox = document.getElementById("trip-pricing");
+      const totalOutput = document.getElementById("estimated-total");
+
+      if (!seatsInput || !pricingBox || !totalOutput) {
+        return;
+      }
+
+      const pricePerSeat = parseFloat(pricingBox.dataset.price || "0");
+
+      function updateTotal() {
+        const seats = parseInt(seatsInput.value, 10);
+        const safeSeats = Number.isNaN(seats) || seats < 1 ? 0 : seats;
+        const total = safeSeats * pricePerSeat;
+        totalOutput.textContent = `GBP ${total.toFixed(2)}`;
+      }
+
+      seatsInput.addEventListener("input", updateTotal);
+      updateTotal();
+    })();
+  </script>
 {% endblock %}
