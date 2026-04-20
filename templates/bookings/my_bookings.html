@@ -38,6 +38,8 @@
                 <a href="{% url 'bookings:delete_booking' booking.id %}">Delete</a>
                 {% if not booking.is_paid %}
                   | <a href="{% url 'payments:checkout' booking.id %}">Pay now</a>
+                {% else %}
+                  | <a href="{% url 'bookings:ticket_view' booking.id %}">View ticket</a>
                 {% endif %}
               </td>
             </tr>

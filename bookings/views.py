@@ -129,3 +129,18 @@ def delete_booking(request, booking_id):
         return redirect("bookings:my_bookings")
 
     return render(request, "bookings/booking_confirm_delete.html", {"booking": booking})
+
+
+@login_required(login_url="accounts:login")
+def ticket_view(request, booking_id):
+    booking = get_object_or_404(
+        Booking.objects.select_related("trip"),
+        id=booking_id,
+        user=request.user,
+    )
+
+    if not booking.is_paid:
+        messages.warning(request, "You need to complete payment before viewing your ticket.")
+        return redirect("payments:checkout", booking_id=booking.id)
+
+    return render(request, "bookings/ticket.html", {"booking": booking})

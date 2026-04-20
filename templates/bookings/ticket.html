@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Your Ticket — Train Seat Booking{% endblock %}
+
+{% block content %}
+  <h1>Your ticket</h1>
+  <p>This ticket is only available for paid bookings.</p>
+
+  <div style="background: #fff; padding: 1rem; border-radius: 6px;">
+    <p><strong>Booking reference:</strong> {{ booking.booking_reference }}</p>
+    <p><strong>Passenger:</strong> {{ booking.user.username }}</p>
+    <p><strong>Route:</strong> {{ booking.trip.origin }} to {{ booking.trip.destination }}</p>
+    <p><strong>Departure:</strong> {{ booking.trip.departure_time|date:"D d M Y, H:i" }}</p>
+    <p><strong>Seats:</strong> {{ booking.seats_booked }}</p>
+    <p><strong>Status:</strong> Paid</p>
+  </div>
+
+  <p style="margin-top: 1rem;">
+    <a href="{% url 'bookings:booking_detail' booking.id %}">Back to booking details</a>
+  </p>
+{% endblock %}
