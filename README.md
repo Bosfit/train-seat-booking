@@ -15,7 +15,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Manual Testing Summary](#manual-testing-summary)
 - [Automated Tests](#automated-tests)
 - [Known Issues / Limitations](#known-issues--limitations)
-- [Screenshots to Add](#screenshots-to-add)
+- [Screenshots](#screenshots)
 
 ---
 
@@ -235,9 +235,7 @@ Latest run result:
 
 ---
 
-## Screenshots to Add
-
-Add screenshots in the `docs/` folder and link them below.
+## Screenshots
 
 ### 1) Home trip list page
 
