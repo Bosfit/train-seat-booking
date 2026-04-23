@@ -1,6 +1,6 @@
 # Train Seat Booking App: Reserve your train seats with ease
 
-Train Seat Booking is a simple web application built with Python, Django, HTML, CSS, and JavaScript. It helps users browse available train trips, choose their seats, and complete bookings in a clear step-by-step flow.
+Train Seat Booking is a simple web application built with Python, Django, HTML, CSS, and JavaScript. It helps users browse available train trips, choose their seats, and complete bookings in a clear step by step flow.
 
 ---
 
@@ -14,13 +14,14 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Features](#features)
 - [Manual Testing Summary](#manual-testing-summary)
 - [Automated Tests](#automated-tests)
+- [Known Issues / Limitations](#known-issues--limitations)
 - [Screenshots to Add](#screenshots-to-add)
 
 ---
 
 ## Project Goals
 
-- Build a beginner-friendly train booking website with clear navigation and simple forms.
+- Build a beginner friendly train booking website with clear navigation and simple forms.
 - Allow users to register, log in, and manage their own bookings safely.
 - Support a complete booking flow from selecting a trip to making a test payment.
 - Provide clear success and error messages so users always know what is happening.
@@ -40,11 +41,11 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 
 - As a visitor, I want to view available train trips so that I can decide what to book.
 - As a user, I want to create an account so that I can save and manage my bookings.
-- As a logged-in user, I want to create a booking so that I can reserve seats on a trip.
-- As a logged-in user, I want to view my bookings so that I can check my trip details.
-- As a logged-in user, I want to edit or cancel my own booking so that I can fix mistakes.
-- As a logged-in user, I want to pay for an unpaid booking so that I can confirm my reservation.
-- As a logged-in user, I want paid-only access to my ticket page so that unpaid bookings stay restricted.
+- As a logged in user, I want to create a booking so that I can reserve seats on a trip.
+- As a logged in user, I want to view my bookings so that I can check my trip details.
+- As a logged in user, I want to edit or cancel my own booking so that I can fix mistakes.
+- As a logged in user, I want to pay for an unpaid booking so that I can confirm my reservation.
+- As a logged in user, I want paid only access to my ticket page so that unpaid bookings stay restricted.
 
 ---
 
@@ -61,8 +62,8 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 ### Should Have
 
 - Helpful validation and user feedback messages.
-- Paid-only ticket view.
-- Mobile-friendly layout and navigation.
+- Paid only ticket view.
+- Mobile friendly layout and navigation.
 
 ### Could Have
 
@@ -74,7 +75,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 
 - Live train API integration.
 - Real production payments (test mode only).
-- Seat map visualisation with real-time seat locking.
+- Seat map visualisation with real time seat locking.
 
 ---
 
@@ -145,7 +146,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - Success and cancel pages.
 - Booking is marked paid on successful payment confirmation.
 
-### Paid-only ticket access
+### Paid only ticket access
 
 - Paid bookings show a "View ticket" action.
 - Unpaid users are redirected to checkout when trying to open a ticket.
@@ -167,7 +168,7 @@ The following core user flows were tested manually in the browser.
 ### Booking CRUD
 
 - Create booking from trip list saves booking and reduces available seats.
-- My bookings page lists only the logged-in user's bookings.
+- My bookings page lists only the logged in user's bookings.
 - Booking detail page shows correct booking data.
 - Edit booking updates seat count and keeps trip seat totals consistent.
 - Delete booking removes booking and restores seats to the trip.
@@ -219,9 +220,18 @@ Latest run result:
 #### `payments/tests.py`
 
 - Checkout POST redirects to Stripe session URL (mocked).
-- Already-paid bookings cannot re-enter checkout.
+- Already paid bookings cannot enter checkout again.
 - Success flow marks booking as paid when Stripe confirms payment.
 - Ownership checks prevent users paying for another user's booking.
+
+---
+
+## Known Issues / Limitations
+
+- The current Stripe implementation marks `Booking.is_paid = True` on the success page return flow.
+- This works for development and project demonstration, but is not as robust as webhook confirmation.
+- In a production ready version, payment confirmation should be handled by Stripe webhooks (for example `checkout.session.completed`) to avoid relying only on browser redirects.
+- Stripe integration is currently in test mode and uses test API keys.
 
 ---
 
