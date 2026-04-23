@@ -12,6 +12,8 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [MoSCoW Priorities](#moscow-priorities)
 - [Simple Agile Board](#simple-agile-board)
 - [Features](#features)
+- [Manual Testing Summary](#manual-testing-summary)
+- [Automated Tests](#automated-tests)
 - [Screenshots to Add](#screenshots-to-add)
 
 ---
@@ -148,6 +150,78 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - Paid bookings show a "View ticket" action.
 - Unpaid users are redirected to checkout when trying to open a ticket.
 - Ticket page displays booking and trip summary for paid users only.
+
+---
+
+## Manual Testing Summary
+
+The following core user flows were tested manually in the browser.
+
+### Authentication flows
+
+- Register with valid details creates a new user and logs them in.
+- Login with valid credentials grants access to protected pages.
+- Logout returns the user to public flow and protected pages require login again.
+- Register/login validation messages appear for invalid input.
+
+### Booking CRUD
+
+- Create booking from trip list saves booking and reduces available seats.
+- My bookings page lists only the logged-in user's bookings.
+- Booking detail page shows correct booking data.
+- Edit booking updates seat count and keeps trip seat totals consistent.
+- Delete booking removes booking and restores seats to the trip.
+
+### Payment and ticket gate
+
+- Unpaid booking shows "Pay now" action.
+- Checkout page opens and redirects to Stripe test checkout.
+- Successful payment marks booking as paid.
+- Paid booking shows "View ticket" action.
+- Ticket page is accessible only for paid bookings.
+
+### Permissions and route protection
+
+- Unauthenticated users are redirected to login for protected routes.
+- Users cannot access another user's booking detail, edit, delete, checkout, or ticket routes.
+- Unpaid users are redirected to checkout if they try to open ticket directly.
+
+---
+
+## Automated Tests
+
+Automated tests were run with Django's test runner using:
+
+`python manage.py test accounts bookings payments`
+
+Latest run result:
+
+- Total tests: **13**
+- Result: **PASS**
+
+### What each test file covers
+
+#### `accounts/tests.py`
+
+- User registration creates account and logs user in.
+- Login supports `next` redirect to requested page.
+- Logout redirects user to home page.
+
+#### `bookings/tests.py`
+
+- Booking creation reduces available trip seats.
+- Overbooking validation blocks invalid seat requests.
+- Past-trip booking validation is enforced.
+- Ownership checks prevent accessing another user's booking.
+- Ticket gate redirects unpaid bookings to checkout.
+- Paid bookings can access the ticket page.
+
+#### `payments/tests.py`
+
+- Checkout POST redirects to Stripe session URL (mocked).
+- Already-paid bookings cannot re-enter checkout.
+- Success flow marks booking as paid when Stripe confirms payment.
+- Ownership checks prevent users paying for another user's booking.
 
 ---
 
