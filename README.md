@@ -11,6 +11,8 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [User Stories](#user-stories)
 - [MoSCoW Priorities](#moscow-priorities)
 - [Simple Agile Board](#simple-agile-board)
+- [Features](#features)
+- [Screenshots to Add](#screenshots-to-add)
 
 ---
 
@@ -93,3 +95,110 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - Create Django project.
 - Create 3 apps: `accounts`, `bookings`, `payments`.
 - Connect app URLs in project URL config.
+
+---
+
+## Features
+
+### Base UI and navigation
+
+- Shared layout using `base.html` with a navbar and message area.
+- Responsive page structure for desktop and mobile.
+- Clear navigation links for Home, My bookings, Login/Register, and Logout.
+
+### Authentication
+
+- User registration with validation feedback.
+- User login/logout flow.
+- Protected routes for booking and payment pages (login required).
+
+### Trip listing and booking creation
+
+- Home page shows available train trips (route, departure, price, seats left).
+- "Book this trip" action for each listed trip.
+- Booking form with seat input and backend validation.
+
+### Booking management (CRUD)
+
+- Users can view their own bookings in a dedicated list.
+- Booking detail page for each booking.
+- Users can edit and delete their own bookings.
+- Ownership protection is enforced (users cannot access other users' bookings).
+
+### Booking validation rules
+
+- Prevent booking past trips.
+- Prevent overbooking when requested seats exceed available seats.
+- Seat count updates after create/edit/delete to stay consistent.
+
+### JavaScript enhancement
+
+- Live fare calculator on booking form.
+- Estimated total updates instantly as seat count changes.
+
+### Stripe test payment flow
+
+- Checkout page for unpaid bookings.
+- Stripe test payment redirection.
+- Success and cancel pages.
+- Booking is marked paid on successful payment confirmation.
+
+### Paid-only ticket access
+
+- Paid bookings show a "View ticket" action.
+- Unpaid users are redirected to checkout when trying to open a ticket.
+- Ticket page displays booking and trip summary for paid users only.
+
+---
+
+## Screenshots to Add
+
+Add screenshots in the `docs/` folder and link them below.
+
+### 1) Home trip list page
+
+Shows available trips table and "Book this trip" links.
+
+![Home Trip List](docs/home-trip-list.png)
+
+### 2) Register page with validation
+
+Shows clear validation message for invalid username/password input.
+
+![Register Validation](docs/register-validation.png)
+
+### 3) Booking form with live fare calculator
+
+Shows seats input and the estimated total updating.
+
+![Booking Form Fare Calculator](docs/booking-form-fare-calculator.png)
+
+### 4) My bookings page
+
+Shows booking rows and actions (View/Edit/Delete and Pay now or View ticket).
+
+![My Bookings](docs/my-bookings.png)
+
+### 5) Booking detail page (unpaid)
+
+Shows booking summary and "Pay now" button.
+
+![Booking Detail Unpaid](docs/booking-detail-unpaid.png)
+
+### 6) Stripe checkout page (app side)
+
+Shows your checkout summary page before redirecting to Stripe.
+
+![Checkout Summary](docs/checkout-summary.png)
+
+### 7) Payment success page
+
+Shows success message and paid confirmation.
+
+![Payment Success](docs/payment-success.png)
+
+### 8) Paid ticket page
+
+Shows ticket details after payment.
+
+![Paid Ticket](docs/paid-ticket.png)
