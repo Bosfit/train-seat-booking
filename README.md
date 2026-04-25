@@ -17,7 +17,9 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Known Issues / Limitations](#known-issues--limitations)
 - [Technologies Used](#technologies-used)
 - [Data Schema](#data-schema)
+- [Local Setup](#local-setup)
 - [Deployment](#deployment)
+- [Validation and Testing Evidence](#validation-and-testing-evidence)
 - [Credits / Attribution](#credits--attribution)
 - [Screenshots](#screenshots)
 
@@ -305,6 +307,32 @@ The project uses two main models in the `bookings` app.
 
 ---
 
+## Local Setup
+
+Follow these steps to run the project locally:
+
+1. Clone the repository:
+   - `git clone https://github.com/Bosfit/train-seat-booking.git`
+2. Move into the project folder:
+   - `cd train-seat-booking`
+3. Create and activate a virtual environment (Windows PowerShell):
+   - `python -m venv venv`
+   - `.\venv\Scripts\Activate.ps1`
+4. Install dependencies:
+   - `pip install -r requirements.txt`
+5. Create a local `.env` file (based on `.env.example`) and set:
+   - `SECRET_KEY`
+   - `DEBUG=True`
+   - `ALLOWED_HOSTS=127.0.0.1,localhost`
+   - `STRIPE_PUBLISHABLE_KEY`
+   - `STRIPE_SECRET_KEY`
+6. Apply migrations:
+   - `python manage.py migrate`
+7. Run the development server:
+   - `python manage.py runserver`
+
+---
+
 ## Deployment
 
 ### Live application
@@ -330,6 +358,17 @@ The project uses two main models in the `bookings` app.
 - Booking create, edit, and delete flows work.
 - Stripe test checkout flow works.
 - Paid ticket gate works (`View ticket` for paid bookings, checkout redirect for unpaid).
+
+---
+
+## Validation and Testing Evidence
+
+- Django project checks were run with:
+  - `python manage.py check`
+- Automated test suite was run with:
+  - `python manage.py test accounts bookings payments`
+- Latest automated test result:
+  - 13 tests run, all passing.
 
 ---
 
