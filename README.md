@@ -16,6 +16,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Automated Tests](#automated-tests)
 - [Known Issues / Limitations](#known-issues--limitations)
 - [Technologies Used](#technologies-used)
+- [Data Schema](#data-schema)
 - [Deployment](#deployment)
 - [Screenshots](#screenshots)
 
@@ -263,6 +264,43 @@ Latest run result:
 - Stripe Dashboard (test mode) for payment testing
 - Windows PowerShell for local command line workflow
 - Django admin for managing trips and bookings
+
+---
+
+## Data Schema
+
+The project uses two main models in the `bookings` app.
+
+### `TrainTrip`
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | BigAutoField | Primary key |
+| `origin` | CharField(100) | Departure location |
+| `destination` | CharField(100) | Arrival location |
+| `departure_time` | DateTimeField | Date and time of trip |
+| `price` | DecimalField(8, 2) | Price per seat |
+| `seats_available` | PositiveIntegerField | Seats currently available |
+| `created_at` | DateTimeField | Auto set on create |
+
+### `Booking`
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | BigAutoField | Primary key |
+| `user` | ForeignKey -> User | Booking owner |
+| `trip` | ForeignKey -> TrainTrip | Linked trip |
+| `seats_booked` | PositiveIntegerField | Number of seats booked |
+| `booking_reference` | CharField(20), unique | Human-readable booking ID |
+| `is_paid` | BooleanField | Payment status |
+| `created_at` | DateTimeField | Auto set on create |
+| `updated_at` | DateTimeField | Auto updated on save |
+
+### Relationships
+
+- One user can have many bookings (`User` 1 -> many `Booking`).
+- One trip can have many bookings (`TrainTrip` 1 -> many `Booking`).
+- Each booking belongs to one user and one trip.
 
 ---
 
