@@ -1,5 +1,7 @@
 # Train Seat Booking App: Reserve your train seats with ease
 
+Project status: Completed and deployed on Heroku.
+
 Train Seat Booking is a simple web application built with Python, Django, HTML, CSS, and JavaScript. It helps users browse available train trips, choose their seats, and complete bookings in a clear step by step flow.
 
 ---
@@ -353,6 +355,8 @@ Follow these steps to run the project locally:
    - `STRIPE_SECRET_KEY`
 4. Connect the GitHub repository to Heroku and deploy the `main` branch.
 5. Ensure migrations run on deploy (handled via `Procfile` release command).
+
+The project uses SQLite for local development and Heroku Postgres in production via `DATABASE_URL`.
 
 ### Production checks after deploy
 
