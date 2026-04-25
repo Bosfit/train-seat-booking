@@ -18,6 +18,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Technologies Used](#technologies-used)
 - [Data Schema](#data-schema)
 - [Deployment](#deployment)
+- [Credits / Attribution](#credits--attribution)
 - [Screenshots](#screenshots)
 
 ---
@@ -329,6 +330,16 @@ The project uses two main models in the `bookings` app.
 - Booking create, edit, and delete flows work.
 - Stripe test checkout flow works.
 - Paid ticket gate works (`View ticket` for paid bookings, checkout redirect for unpaid).
+
+---
+
+## Credits / Attribution
+
+- [Django Documentation](https://docs.djangoproject.com/) for project structure, authentication patterns, and deployment guidance.
+- [Stripe Documentation](https://stripe.com/docs) for Checkout integration and Stripe test card usage.
+- [Heroku Dev Center](https://devcenter.heroku.com/) for deployment setup and configuration references.
+- Code Institute learning materials and walkthrough guidance from the Full Stack Software Development course.
+- Tutor support and feedback during development and debugging stages.
 
 ---
 
