@@ -206,6 +206,7 @@ Latest run result:
 
 - Total tests: **13**
 - Result: **PASS**
+- Last automated test run: **25 April 2026 (UTC+1)**
 
 ### What each test file covers
 
