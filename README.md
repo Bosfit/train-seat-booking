@@ -15,6 +15,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Manual Testing Summary](#manual-testing-summary)
 - [Automated Tests](#automated-tests)
 - [Known Issues / Limitations](#known-issues--limitations)
+- [Deployment](#deployment)
 - [Screenshots](#screenshots)
 
 ---
@@ -232,6 +233,34 @@ Latest run result:
 - This works for development and project demonstration, but is not as robust as webhook confirmation.
 - In a production ready version, payment confirmation should be handled by Stripe webhooks (for example `checkout.session.completed`) to avoid relying only on browser redirects.
 - Stripe integration is currently in test mode and uses test API keys.
+
+---
+
+## Deployment
+
+### Live application
+
+- Heroku app: [Train Seat Booking](https://train-seat-booking-app-46d6a82ee8df.herokuapp.com/)
+
+### Heroku deployment steps
+
+1. Create a new Heroku app in the Heroku dashboard.
+2. Add the **Heroku Postgres** add-on (this sets `DATABASE_URL` automatically).
+3. Set required config vars in Heroku:
+   - `SECRET_KEY`
+   - `DEBUG=False`
+   - `ALLOWED_HOSTS=train-seat-booking-app-46d6a82ee8df.herokuapp.com`
+   - `STRIPE_PUBLISHABLE_KEY`
+   - `STRIPE_SECRET_KEY`
+4. Connect the GitHub repository to Heroku and deploy the `main` branch.
+5. Ensure migrations run on deploy (handled via `Procfile` release command).
+
+### Production checks after deploy
+
+- Register, login, and logout all work.
+- Booking create, edit, and delete flows work.
+- Stripe test checkout flow works.
+- Paid ticket gate works (`View ticket` for paid bookings, checkout redirect for unpaid).
 
 ---
 
