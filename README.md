@@ -82,17 +82,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 
 ## Simple Agile Board
 
-### To Do
-
-- Add optional webhook confirmation for Stripe payment status updates.
-- Add profile management page for account details.
-- Add advanced trip filtering (for example by date or destination).
-
-### Doing
-
-- Final documentation polish and project submission checks.
-
-### Done
+### Completed Work
 
 - Create Django project.
 - Create 3 apps: `accounts`, `bookings`, `payments`.
