@@ -21,6 +21,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Deployment](#deployment)
 - [Validation and Testing Evidence](#validation-and-testing-evidence)
 - [Bugs Fixed](#bugs-fixed)
+- [Future Improvements](#future-improvements)
 - [Credits / Attribution](#credits--attribution)
 - [Screenshots](#screenshots)
 
@@ -377,6 +378,14 @@ Follow these steps to run the project locally:
 
 - **Heroku Bad Request (400):** Fixed a production `ALLOWED_HOSTS` issue by setting the correct Heroku domain in config vars.
 - **Trips becoming unbookable over time:** Added a migration to roll past seeded trip dates forward so ongoing booking tests remain valid.
+
+---
+
+## Future Improvements
+
+- Add Stripe webhook handling (`checkout.session.completed`) for stronger payment confirmation in production.
+- Add trip filtering and sorting options (for example by date, origin, and destination).
+- Add user profile management so users can update account details from the app.
 
 ---
 
