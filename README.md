@@ -15,6 +15,7 @@ Train Seat Booking is a simple web application built with Python, Django, HTML, 
 - [Manual Testing Summary](#manual-testing-summary)
 - [Automated Tests](#automated-tests)
 - [Known Issues / Limitations](#known-issues--limitations)
+- [Technologies Used](#technologies-used)
 - [Deployment](#deployment)
 - [Screenshots](#screenshots)
 
@@ -230,6 +231,38 @@ Latest run result:
 - This works for development and project demonstration, but is not as robust as webhook confirmation.
 - In a production ready version, payment confirmation should be handled by Stripe webhooks (for example `checkout.session.completed`) to avoid relying only on browser redirects.
 - Stripe integration is currently in test mode and uses test API keys.
+
+---
+
+## Technologies Used
+
+### Languages
+
+- Python
+- HTML
+- CSS
+- JavaScript
+
+### Framework and runtime
+
+- Django
+- Gunicorn
+
+### Libraries and packages
+
+- `stripe` for Stripe checkout integration
+- `dj-database-url` for environment-based database configuration
+- `psycopg2-binary` for PostgreSQL connection support
+- `python-dotenv` for loading local environment variables
+- `whitenoise` for serving static files in production
+
+### Tools and platforms
+
+- Git and GitHub for version control
+- Heroku for deployment and hosting
+- Stripe Dashboard (test mode) for payment testing
+- Windows PowerShell for local command line workflow
+- Django admin for managing trips and bookings
 
 ---
 
