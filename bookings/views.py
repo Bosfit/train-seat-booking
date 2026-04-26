@@ -24,7 +24,6 @@ def create_booking(request, trip_id):
         if form.is_valid():
             try:
                 with transaction.atomic():
-                    # Lock the trip row so two users cannot overbook at the same time.
                     trip = TrainTrip.objects.select_for_update().get(id=trip_id)
                     booking = form.save(commit=False)
                     booking.user = request.user

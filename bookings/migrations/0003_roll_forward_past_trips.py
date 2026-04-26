@@ -12,7 +12,6 @@ def roll_forward_past_trips(apps, schema_editor):
     past_trips = TrainTrip.objects.filter(departure_time__lte=now).order_by("departure_time")
 
     for index, trip in enumerate(past_trips):
-        # Keep seed/demo trips usable by moving old departures into the future.
         trip.departure_time = future_start + timedelta(days=index, hours=2)
         trip.save(update_fields=["departure_time"])
 
